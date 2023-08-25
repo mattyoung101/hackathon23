@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c75ny0c13hqxk"]
+[gd_scene load_steps=11 format=3 uid="uid://c75ny0c13hqxk"]
 
 [ext_resource type="Script" path="res://node_3d.gd" id="1_523v0"]
 [ext_resource type="AudioStream" uid="uid://d3dscfyx8t6nt" path="res://audio/corporate_t17.ogg" id="2_kwyn4"]
@@ -23,7 +23,7 @@ tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Camera3D")
-tracks/0/interp = 2
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0.2, 1, -8.40456, 4.52572, -2.44207, 9.9, 1, -4.01454, 1.63248, -2.44207)
 tracks/1/type = "rotation_3d"
@@ -41,21 +41,59 @@ tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Camera3D")
-tracks/0/interp = 2
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0.1, 1, -8.40456, 0.824355, -2.44207, 9.9, 1, -4.7485, 0.824355, -2.94983)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("Camera3D")
-tracks/1/interp = 2
+tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0.1, 1, 0, -0.686275, 0, 0.727342, 9.8, 1, -0.222546, 0.806521, -0.273995, -0.474262)
+tracks/1/keys = PackedFloat32Array(0.1, 1, 0, -0.686275, 0, 0.727342, 9.9, 1, -0.222546, 0.806521, -0.273995, -0.474262)
+
+[sub_resource type="Animation" id="Animation_udd61"]
+resource_name = "camera_move_3"
+length = 10.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -11.3482, 4.83422, -2.99281, 10, 1, -10.7643, 4.83422, -6.73282)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, -0.686275, 0, 0.727342, 10, 1, 0, 0.920112, 0, -0.391655)
+
+[sub_resource type="Animation" id="Animation_1nsde"]
+resource_name = "camera_move_4"
+length = 10.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 5.60659, 6.90509, -2.34052, 10, 1, -5.52919, 6.90509, -2.79093)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.735583, 0, 0.677434, 10, 1, -0.322441, 0.645398, 0.327448, 0.61014)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hk2vr"]
 _data = {
 "camera_move_1": SubResource("Animation_6rdm0"),
-"camera_move_2": SubResource("Animation_3y7ww")
+"camera_move_2": SubResource("Animation_3y7ww"),
+"camera_move_3": SubResource("Animation_udd61"),
+"camera_move_4": SubResource("Animation_1nsde")
 }
 
 [node name="Node3D" type="Node3D"]
@@ -69,7 +107,7 @@ stream = ExtResource("2_kwyn4")
 autoplay = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.451099, -0.618866, -0.643051, -0.0990854, 0.7508, -0.653055, 0.886957, -0.230875, -0.400005, -4.7485, 0.824355, -2.94983)
+transform = Transform3D(0.0580516, 0, -0.998314, 0, 1, 0, 0.998314, 0, 0.0580516, -4.01454, 1.63248, -2.44207)
 
 [node name="sponza" parent="." instance=ExtResource("3_rx7nn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02802, 0, -2.37032)

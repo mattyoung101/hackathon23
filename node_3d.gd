@@ -20,8 +20,8 @@ func _ready():
 		var colour = Color(rng.randf(), rng.randf(), rng.randf())
 		i += interval
 		
-		var x = rng.randf_range(-5.0, 5.0)
-		var y = rng.randf_range(-10.0, 10.0)
+		var x = rng.randf_range(-10.0, 10.0)
+		var y = rng.randf_range(-2.0, 10.0)
 		var z = rng.randf_range(-10.0, 10.0)
 		var pos = Vector3(x, y, z)
 		print("Pos: %s" % pos)

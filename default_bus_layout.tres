@@ -4,6 +4,6 @@
 resource_name = "SpectrumAnalyzer"
 
 [resource]
-bus/0/volume_db = -3.32444
+bus/0/volume_db = -9.2092
 bus/0/effect/0/effect = SubResource("AudioEffectSpectrumAnalyzer_xcf5b")
 bus/0/effect/0/enabled = true
