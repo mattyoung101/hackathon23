@@ -7,6 +7,7 @@ var rng = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var ball_scene = load("res://ball.tscn")
 	rng.seed = 0xB0FADEE5
 	
 	# calculate colour interval
@@ -25,6 +26,11 @@ func _ready():
 		var z = rng.randf_range(-10.0, 10.0)
 		var pos = Vector3(x, y, z)
 		print("Pos: %s" % pos)
+		
+		print("Creating...")
+		var new_ball = ball_scene.instantiate()
+		new_ball.set_position(pos)
+		add_child(new_ball)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

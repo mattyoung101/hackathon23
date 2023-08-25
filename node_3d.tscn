@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c75ny0c13hqxk"]
+[gd_scene load_steps=5 format=3 uid="uid://c75ny0c13hqxk"]
 
 [ext_resource type="Script" path="res://node_3d.gd" id="1_523v0"]
 [ext_resource type="AudioStream" uid="uid://ceu1cevjjiub7" path="res://audio/resonate.ogg" id="1_i2guh"]
@@ -15,21 +15,6 @@ glow_enabled = true
 glow_intensity = 0.97
 glow_strength = 1.19
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lo2ll"]
-albedo_color = Color(0.266667, 1, 0, 1)
-metallic_specular = 0.36
-roughness = 0.0
-emission_enabled = true
-emission = Color(0.235294, 1, 0, 1)
-emission_energy_multiplier = 8.0
-refraction_scale = -0.68
-distance_fade_min_distance = 1.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_ik7cx"]
-material = SubResource("StandardMaterial3D_lo2ll")
-radius = 0.3
-height = 0.6
-
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_523v0")
 
@@ -40,16 +25,12 @@ environment = SubResource("Environment_6scuh")
 stream = ExtResource("1_i2guh")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.0580519, 0, -0.998314, 0, 1, 0, 0.998314, 0, 0.0580519, -2.08911, 0.474013, -2.44207)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.484188, -2.55891)
-gi_mode = 2
-mesh = SubResource("SphereMesh_ik7cx")
+transform = Transform3D(0.0580519, 0, -0.998314, 0, 1, 0, 0.998314, 0, 0.0580519, -7.70815, 1.59098, -2.44207)
 
 [node name="sponza" parent="." instance=ExtResource("3_rx7nn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02802, 0, -2.37032)
 
 [node name="VoxelGI" type="VoxelGI" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68619, 2.50239, -1.95355)
+visible = false
 size = Vector3(30, 20, 20)
