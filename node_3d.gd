@@ -1,7 +1,7 @@
 extends Node3D
 
 # Number of balls to display
-const NUM_BALLS = 20
+const NUM_BALLS = 200
 
 var rng = RandomNumberGenerator.new()
 
@@ -21,7 +21,7 @@ func _ready():
 		colours.append(Color.from_hsv(i, 1.0, 1.0))
 		i += interval
 		
-		var x = rng.randf_range(-10.0, 10.0)
+		var x = rng.randf_range(-5.0, 5.0)
 		var y = rng.randf_range(-10.0, 10.0)
 		var z = rng.randf_range(-10.0, 10.0)
 		var pos = Vector3(x, y, z)

@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c75ny0c13hqxk"]
+[gd_scene load_steps=7 format=3 uid="uid://c75ny0c13hqxk"]
 
 [ext_resource type="Script" path="res://node_3d.gd" id="1_523v0"]
-[ext_resource type="AudioStream" uid="uid://ceu1cevjjiub7" path="res://audio/resonate.ogg" id="1_i2guh"]
+[ext_resource type="AudioStream" uid="uid://d3dscfyx8t6nt" path="res://audio/corporate_t17.ogg" id="2_kwyn4"]
 [ext_resource type="PackedScene" uid="uid://b4eps4iisdy4o" path="res://models/sponza.glb" id="3_rx7nn"]
 
 [sub_resource type="Environment" id="Environment_6scuh"]
@@ -15,6 +15,22 @@ glow_enabled = true
 glow_intensity = 0.97
 glow_strength = 1.19
 
+[sub_resource type="Animation" id="Animation_6rdm0"]
+resource_name = "camera_move_1"
+length = 10.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0.2, 1, -8.40456, 4.52572, -2.44207, 9.9, 1, -4.01454, 1.63248, -2.44207)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hk2vr"]
+_data = {
+"camera_move_1": SubResource("Animation_6rdm0")
+}
+
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_523v0")
 
@@ -22,10 +38,11 @@ script = ExtResource("1_523v0")
 environment = SubResource("Environment_6scuh")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_i2guh")
+stream = ExtResource("2_kwyn4")
+autoplay = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.0580519, 0, -0.998314, 0, 1, 0, 0.998314, 0, 0.0580519, -7.70815, 1.59098, -2.44207)
+transform = Transform3D(0.0580519, 0, -0.998314, 0, 1, 0, 0.998314, 0, 0.0580519, -8.40456, 4.52572, -2.44207)
 
 [node name="sponza" parent="." instance=ExtResource("3_rx7nn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02802, 0, -2.37032)
@@ -34,3 +51,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02802, 0, -2.37032)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68619, 2.50239, -1.95355)
 visible = false
 size = Vector3(30, 20, 20)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "camera_move_1"
+libraries = {
+"": SubResource("AnimationLibrary_hk2vr")
+}
