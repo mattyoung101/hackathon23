@@ -31,6 +31,11 @@ func _ready():
 		var new_ball = ball_scene.instantiate()
 		new_ball.set_position(pos)
 		add_child(new_ball)
+		
+		# MY JIRA
+		# HACK-1063: Extract the material (80 story points)
+		# HACK-1064: Change the base colour (2 story points), blocked by HACK-1063
+		# HACK-1065: Change the emissive colour (2 story points), blocked by HACK-1063
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
