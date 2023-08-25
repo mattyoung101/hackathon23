@@ -1,20 +1,32 @@
-[gd_scene load_steps=11 format=3 uid="uid://c75ny0c13hqxk"]
+[gd_scene load_steps=13 format=3 uid="uid://c75ny0c13hqxk"]
 
 [ext_resource type="Script" path="res://node_3d.gd" id="1_523v0"]
-[ext_resource type="AudioStream" uid="uid://d3dscfyx8t6nt" path="res://audio/corporate_t17.ogg" id="2_kwyn4"]
+[ext_resource type="AudioStream" uid="uid://c3xi73c6l2ap8" path="res://audio/worldless_instrumental.ogg" id="2_l8k8p"]
 [ext_resource type="PackedScene" uid="uid://b4eps4iisdy4o" path="res://models/sponza.glb" id="3_rx7nn"]
 [ext_resource type="Script" path="res://animation.gd" id="4_c1mgt"]
+[ext_resource type="Script" path="res://fpslabel.gd" id="5_eapda"]
+[ext_resource type="Texture2D" uid="uid://b4k8waa6mdxre" path="res://texture/Starbasesnow.png" id="6_fkhra"]
 
 [sub_resource type="Environment" id="Environment_6scuh"]
 ambient_light_source = 2
 ambient_light_color = Color(0.976471, 0.937255, 0.854902, 1)
-ambient_light_energy = 0.1
+ambient_light_energy = 0.05
+tonemap_mode = 1
 tonemap_exposure = 1.5
 ssr_enabled = true
 ssao_enabled = true
+ssil_sharpness = 1.0
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_energy = 0.2
 glow_enabled = true
 glow_intensity = 0.97
 glow_strength = 1.19
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.02
+volumetric_fog_emission_energy = 0.0
+adjustment_enabled = true
+adjustment_saturation = 1.55
 
 [sub_resource type="Animation" id="Animation_6rdm0"]
 resource_name = "camera_move_1"
@@ -25,14 +37,14 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("Camera3D")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0.2, 1, -8.40456, 4.52572, -2.44207, 9.9, 1, -4.01454, 1.63248, -2.44207)
+tracks/0/keys = PackedFloat32Array(0, 1, -8.40456, 4.52572, -2.44207, 10, 1, -4.01454, 1.63248, -2.44207)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("Camera3D")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, -0.686276, 0, 0.727342, 9.9, 1, 0, -0.686276, 0, 0.727342)
+tracks/1/keys = PackedFloat32Array(0, 1, 0, -0.686276, 0, 0.727342, 10, 1, 0.166601, -0.551762, 0.128715, 0.806991)
 
 [sub_resource type="Animation" id="Animation_3y7ww"]
 resource_name = "camera_move_2"
@@ -103,22 +115,26 @@ script = ExtResource("1_523v0")
 environment = SubResource("Environment_6scuh")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_kwyn4")
+stream = ExtResource("2_l8k8p")
 autoplay = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.0580516, 0, -0.998314, 0, 1, 0, 0.998314, 0, 0.0580516, -4.01454, 1.63248, -2.44207)
+transform = Transform3D(0.357981, -0.391592, -0.847647, 0.0238955, 0.911353, -0.410931, 0.933423, 0.126851, 0.335605, -4.01454, 1.63248, -2.44207)
 
 [node name="sponza" parent="." instance=ExtResource("3_rx7nn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02802, 0, -2.37032)
-
-[node name="VoxelGI" type="VoxelGI" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68619, 2.50239, -1.95355)
-visible = false
-size = Vector3(30, 20, 20)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_hk2vr")
 }
 script = ExtResource("4_c1mgt")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("5_eapda")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.00682416, 0.999977, 0, -0.999977, 0.00682416, 0, 11.667, -2.72435)
+texture = ExtResource("6_fkhra")

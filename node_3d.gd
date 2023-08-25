@@ -1,7 +1,7 @@
 extends Node3D
 
 # Number of balls to display
-const NUM_BALLS = 200
+const NUM_BALLS = 100
 
 var rng = RandomNumberGenerator.new()
 
@@ -29,7 +29,7 @@ func _ready():
 		print("Creating...")
 		var new_ball = ball_scene.instantiate()
 		new_ball.set_position(pos)
-		new_ball.set_colour(colour)
+		new_ball.create_sphere(colour)
 		add_child(new_ball)
 		
 		# MY JIRA
