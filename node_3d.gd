@@ -12,13 +12,12 @@ func _ready():
 	
 	# calculate colour interval
 	var interval = 1.0 / NUM_BALLS
-	var colours = []
 	print("Colour interval: " + str(interval))
 	
 	var i = 0.0
 	while i <= 1.0:
-		print("HSV: %s, %s, %s" % [i, 1.0, 1.0])
-		colours.append(Color.from_hsv(i, 1.0, 1.0))
+		#var colour = Color.from_hsv(i, 1.0, 1.0)
+		var colour = Color(rng.randf(), rng.randf(), rng.randf())
 		i += interval
 		
 		var x = rng.randf_range(-5.0, 5.0)
@@ -30,6 +29,7 @@ func _ready():
 		print("Creating...")
 		var new_ball = ball_scene.instantiate()
 		new_ball.set_position(pos)
+		new_ball.set_colour(colour)
 		add_child(new_ball)
 		
 		# MY JIRA
