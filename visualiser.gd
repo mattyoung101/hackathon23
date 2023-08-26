@@ -1,7 +1,7 @@
 extends Node3D
 
 # Number of balls to display
-const NUM_BALLS = 100
+const NUM_BALLS = 50
 
 # Human hearing range (except for me im based i can hear up to like 20 MHz get trolled)
 const FREQ_MIN = 20.0 # 20 Hz
@@ -13,6 +13,10 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	var ball_scene = load("res://ball.tscn")
 	rng.seed = 0xB0FADEE5
+	
+	# min and max bounding box for spawning
+	var min_spawn = $ball_spawn_min.position
+	var max_spawn = $ball_spawn_max.position
 	
 	# calculate colour interval
 	var interval = 1.0 / NUM_BALLS
@@ -28,9 +32,9 @@ func _ready():
 		var fmax = remap(i, 0.0, 1.0, FREQ_MIN, FREQ_MAX)
 		print("FREQ RANGE: %f ... %f" % [fmin, fmax])
 		
-		var x = rng.randf_range(-10.0, 10.0)
-		var y = rng.randf_range(-2.0, 10.0)
-		var z = rng.randf_range(-10.0, 10.0)
+		var x = rng.randf_range(min_spawn.x, max_spawn.x)
+		var y = rng.randf_range(min_spawn.y, max_spawn.y)
+		var z = rng.randf_range(min_spawn.z, max_spawn.z)
 		var pos = Vector3(x, y, z)
 		
 		var new_ball = ball_scene.instantiate()
