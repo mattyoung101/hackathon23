@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c75ny0c13hqxk"]
+[gd_scene load_steps=25 format=3 uid="uid://c75ny0c13hqxk"]
 
 [ext_resource type="Script" path="res://visualiser.gd" id="1_4jfht"]
 [ext_resource type="AudioStream" uid="uid://d3dscfyx8t6nt" path="res://audio/corporate_t17.ogg" id="2_pnpoh"]
@@ -8,11 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://b4k8waa6mdxre" path="res://texture/Starbasesnow.png" id="6_fkhra"]
 [ext_resource type="FontFile" uid="uid://byeoa8u7ymbaf" path="res://font/EBGaramond-Bold.ttf" id="7_14hjy"]
 [ext_resource type="Shader" path="res://shaders/distortion.gdshader" id="8_3qfta"]
+[ext_resource type="PackedScene" uid="uid://bwn66kfchiggc" path="res://models/leake_street_graffiti_tunnel.glb" id="9_6fmop"]
 
 [sub_resource type="Environment" id="Environment_6scuh"]
 ambient_light_source = 2
 ambient_light_color = Color(0.976471, 0.937255, 0.854902, 1)
-ambient_light_energy = 0.05
+ambient_light_energy = 0.01
 tonemap_mode = 1
 tonemap_exposure = 1.5
 ssr_enabled = true
@@ -102,16 +103,36 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.735583, 0, 0.677434, 10, 1, -0.322441, 0.645398, 0.327448, 0.61014)
 
+[sub_resource type="Animation" id="Animation_e8iyd"]
+resource_name = "camera_move_5"
+length = 50.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0.1, 1, -12.7414, 11.5866, 12.2073, 49.9, 1, 95.7182, 11.5866, 13.1601)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, -0.686276, 0, 0.727342, 49.9, 1, 0, -0.686276, 0, 0.727342)
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hk2vr"]
 _data = {
 "camera_move_1": SubResource("Animation_6rdm0"),
 "camera_move_2": SubResource("Animation_3y7ww"),
 "camera_move_3": SubResource("Animation_udd61"),
-"camera_move_4": SubResource("Animation_1nsde")
+"camera_move_4": SubResource("Animation_1nsde"),
+"camera_move_5": SubResource("Animation_e8iyd")
 }
 
-[sub_resource type="BoxMesh" id="BoxMesh_rqt6a"]
-size = Vector3(0.5, 0.5, 0.5)
+[sub_resource type="BoxMesh" id="BoxMesh_g76xw"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_s3oln"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8t2hg"]
 emission_enabled = true
@@ -181,10 +202,11 @@ stream = ExtResource("2_pnpoh")
 autoplay = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.0821654, 0, 0.996619, 0, 1, 0, -0.996619, 0, -0.0821654, 5.60659, 6.90509, -2.34052)
+transform = Transform3D(0.0580516, 0, -0.998314, 0, 1, 0, 0.998314, 0, 0.0580516, -12.7414, 11.5866, 12.2073)
 
 [node name="sponza" parent="." instance=ExtResource("3_rx7nn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02802, 0, -2.37032)
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -199,23 +221,20 @@ script = ExtResource("5_eapda")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.00682416, 0.999977, 0, -0.999977, 0.00682416, 0, 11.667, -2.72435)
+visible = false
 texture = ExtResource("6_fkhra")
 
 [node name="ball_spawn_min" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.7681, 0.939752, 1.54461)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.5549, 8.74281, 6.765)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ball_spawn_min"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.129897, 0, 0.184564)
-visible = false
-mesh = SubResource("BoxMesh_rqt6a")
+mesh = SubResource("BoxMesh_g76xw")
 
 [node name="ball_spawn_max" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.0896, 11.2084, -6.63714)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 114.326, 15.2084, 25.6041)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ball_spawn_max"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.129897, 0, 0.184564)
-visible = false
-mesh = SubResource("BoxMesh_rqt6a")
+mesh = SubResource("BoxMesh_s3oln")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.000610872, 0, 1, 0, 1, 0, -1, 0, -0.000610872, 1.88043, 6.93916, -2.63791)
@@ -235,3 +254,6 @@ grow_vertical = 2
 libraries = {
 "": SubResource("AnimationLibrary_qw4mx")
 }
+
+[node name="leake_street_graffiti_tunnel" parent="." instance=ExtResource("9_6fmop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.10182, 0, -2.01001)
