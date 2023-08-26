@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://c75ny0c13hqxk"]
 
 [ext_resource type="Script" path="res://node_3d.gd" id="1_523v0"]
-[ext_resource type="AudioStream" uid="uid://c3xi73c6l2ap8" path="res://audio/worldless_instrumental.ogg" id="2_l8k8p"]
+[ext_resource type="AudioStream" uid="uid://d3dscfyx8t6nt" path="res://audio/corporate_t17.ogg" id="2_pnpoh"]
 [ext_resource type="PackedScene" uid="uid://b4eps4iisdy4o" path="res://models/sponza.glb" id="3_rx7nn"]
 [ext_resource type="Script" path="res://animation.gd" id="4_c1mgt"]
 [ext_resource type="Script" path="res://fpslabel.gd" id="5_eapda"]
@@ -115,7 +115,7 @@ script = ExtResource("1_523v0")
 environment = SubResource("Environment_6scuh")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_l8k8p")
+stream = ExtResource("2_pnpoh")
 autoplay = true
 
 [node name="Camera3D" type="Camera3D" parent="."]

@@ -5,13 +5,18 @@ var noise: FastNoiseLite
 var timer = 0.0
 
 const MIN_RADIUS = 0.1
-const MAX_RADIUS = 0.5
+const MAX_RADIUS = 0.75
+const MIN_DB = 80
 
-func create_sphere(colour):
+var freq_min = 0.0
+var freq_max = 0.0
+var spectrum: AudioEffectSpectrumAnalyzerInstance
+
+func create_sphere(colour, fmin, fmax):
 	sphere = SphereMesh.new()
 	sphere.radius = 0.3
 	sphere.height = 2 * sphere.radius
-	sphere.radial_segments = 63
+	sphere.radial_segments = 32
 	sphere.rings = 32
 	
 	var mat = StandardMaterial3D.new()
@@ -34,6 +39,10 @@ func create_sphere(colour):
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	noise.frequency = 0.001
 	#noise.fractal_type = FastNoiseLite.FRACTAL_FBM
+	
+	freq_min = fmin
+	freq_max = fmax
+	spectrum = AudioServer.get_bus_effect_instance(0,0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -50,3 +59,10 @@ func _process(delta):
 	#position.x += noise.get_noise_2d(timer, 1.0)
 	#position.y += noise.get_noise_2d(timer, 2.0)
 	#position.z += noise.get_noise_2d(timer, 3.0)
+	
+	var magnitude: float = spectrum.get_magnitude_for_frequency_range(freq_min, freq_max).length()
+	var energy = clamp((MIN_DB + linear_to_db(magnitude)) / MIN_DB, 0, 1)
+	
+	sphere.radius = remap(energy, 0.0, 1.0, MIN_RADIUS, MAX_RADIUS)
+	sphere.height = 2 * sphere.radius
+	

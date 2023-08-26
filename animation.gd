@@ -17,7 +17,6 @@ func _ready():
 		await animation_finished
 		print("Animation done!")
 		i += 1
-		
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

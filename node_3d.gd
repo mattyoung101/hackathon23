@@ -3,6 +3,10 @@ extends Node3D
 # Number of balls to display
 const NUM_BALLS = 100
 
+# Human hearing range (except for me im based i can hear up to like 20 MHz get trolled)
+const FREQ_MIN = 20.0 # 20 Hz
+const FREQ_MAX = 20000.0 # 20 KHz
+
 var rng = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
@@ -15,27 +19,32 @@ func _ready():
 	print("Colour interval: " + str(interval))
 	
 	var i = 0.0
+	var last_i = 0.0
 	while i <= 1.0:
-		#var colour = Color.from_hsv(i, 1.0, 1.0)
 		var colour = Color(rng.randf(), rng.randf(), rng.randf())
 		i += interval
+		
+		var fmin = remap(last_i, 0.0, 1.0, FREQ_MIN, FREQ_MAX)
+		var fmax = remap(i, 0.0, 1.0, FREQ_MIN, FREQ_MAX)
+		print("FREQ RANGE: %f ... %f" % [fmin, fmax])
 		
 		var x = rng.randf_range(-10.0, 10.0)
 		var y = rng.randf_range(-2.0, 10.0)
 		var z = rng.randf_range(-10.0, 10.0)
 		var pos = Vector3(x, y, z)
-		print("Pos: %s" % pos)
 		
-		print("Creating...")
 		var new_ball = ball_scene.instantiate()
 		new_ball.set_position(pos)
-		new_ball.create_sphere(colour)
+		new_ball.create_sphere(colour, fmin, fmax)
 		add_child(new_ball)
 		
-		# MY JIRA
-		# HACK-1063: Extract the material (80 story points)
-		# HACK-1064: Change the base colour (2 story points), blocked by HACK-1063
-		# HACK-1065: Change the emissive colour (2 story points), blocked by HACK-1063
+		# MATT'S JIRA
+		# HACK-1066: Synchronise the balls to the music (2 story points)
+		# HACK-1067: Scan of AEB (420 story points)
+		
+		# JORDY'S JIRA
+		# HACK-1068: Fixin' this (fixin' the point cloud) (47.638 story points)
+		last_i = i
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
