@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c75ny0c13hqxk"]
+[gd_scene load_steps=22 format=3 uid="uid://c75ny0c13hqxk"]
 
 [ext_resource type="Script" path="res://visualiser.gd" id="1_4jfht"]
 [ext_resource type="AudioStream" uid="uid://d3dscfyx8t6nt" path="res://audio/corporate_t17.ogg" id="2_pnpoh"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://fpslabel.gd" id="5_eapda"]
 [ext_resource type="Texture2D" uid="uid://b4k8waa6mdxre" path="res://texture/Starbasesnow.png" id="6_fkhra"]
 [ext_resource type="FontFile" uid="uid://byeoa8u7ymbaf" path="res://font/EBGaramond-Bold.ttf" id="7_14hjy"]
+[ext_resource type="Shader" path="res://shaders/distortion.gdshader" id="8_3qfta"]
 
 [sub_resource type="Environment" id="Environment_6scuh"]
 ambient_light_source = 2
@@ -123,6 +124,52 @@ text = "AND I LOVED IT"
 font = ExtResource("7_14hjy")
 font_size = 39
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uja43"]
+shader = ExtResource("8_3qfta")
+shader_parameter/strength = 1.0
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/radius = 0.0
+shader_parameter/aberration = 0.425
+shader_parameter/width = 0.04
+shader_parameter/feather = 0.135
+
+[sub_resource type="Animation" id="Animation_qwm2x"]
+resource_name = "bubble"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_r8oo8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qw4mx"]
+_data = {
+"RESET": SubResource("Animation_r8oo8"),
+"bubble": SubResource("Animation_qwm2x")
+}
+
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_4jfht")
 
@@ -171,5 +218,20 @@ visible = false
 mesh = SubResource("BoxMesh_rqt6a")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.000610872, 0, 1, 0, 1, 0, -1, 0, -0.000610872, 1.73077, 6.93916, -2.63791)
+transform = Transform3D(-0.000610872, 0, 1, 0, 1, 0, -1, 0, -0.000610872, 1.88043, 6.93916, -2.63791)
 mesh = SubResource("TextMesh_v84m5")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_uja43")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+libraries = {
+"": SubResource("AnimationLibrary_qw4mx")
+}
