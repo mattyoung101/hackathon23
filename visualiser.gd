@@ -9,6 +9,9 @@ const FREQ_MAX = 20000.0 # 20 KHz
 
 var rng = RandomNumberGenerator.new()
 
+var timer = 0.0
+var chromatic_times = [2.755, 13.190, 23.620, 34.0745, 44.5]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var ball_scene = load("res://ball.tscn")
@@ -55,4 +58,12 @@ func _process(delta):
 	# quit on escape
 	if Input.is_action_pressed("key_exit"):
 		get_tree().quit()
+		
+	# play chromatic abberation at fixed times
+	timer += delta
+	var bubble_player = get_node("CanvasLayer/AnimationPlayer")
+	if not chromatic_times.is_empty() and timer >= chromatic_times[0]:
+		print("Playing chromatic")
+		bubble_player.play("chromatic")
+		chromatic_times.remove_at(0)
 

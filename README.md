@@ -1,4 +1,7 @@
 # Hackathon 2023 Music Visualiser
+
+![](JamViz.png)
+
 This implements a music visualiser using Godot 4. A bunch of spheres with emissive
 lights are drawn around a globally illuminated scene, and the size of the spheres is synchronised
 based on the frequency spectrum of the song. There are also some effects based on the BPM the song

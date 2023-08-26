@@ -42,11 +42,6 @@ func create_sphere(colour, fmin, fmax):
 	
 	add_child(node)
 	
-	noise = FastNoiseLite.new()
-	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
-	noise.frequency = 0.001
-	#noise.fractal_type = FastNoiseLite.FRACTAL_FBM
-	
 	freq_min = fmin
 	freq_max = fmax
 	spectrum = AudioServer.get_bus_effect_instance(0,0)
@@ -60,10 +55,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	# adjust sphere size (works!)
-	#sphere.radius = randf_range(MIN_RADIUS, MAX_RADIUS)
-	#sphere.height = 2 * sphere.radius
-	
 	# some smooth noise to add a bit of movement
 	timer += delta
 	var can_be_large = false
@@ -80,14 +71,10 @@ func _process(delta):
 			var new_colour = Color.from_hsv(rng.randf(), 1.0, 1.0)
 			mat.albedo_color = new_colour
 			mat.emission = new_colour
+			
 			did_just_enter_bar = false
 	else:
 		did_just_enter_bar = true
-			
-	
-	#position.x += noise.get_noise_2d(timer, 1.0)
-	#position.y += noise.get_noise_2d(timer, 2.0)
-	#position.z += noise.get_noise_2d(timer, 3.0)
 	
 	var magnitude: float = spectrum.get_magnitude_for_frequency_range(freq_min, freq_max).length()
 	var energy = clamp((MIN_DB + linear_to_db(magnitude)) / MIN_DB, 0, 1)
