@@ -2,7 +2,7 @@
 
 ![](JamViz.png)
 
-![](screenshot.png)
+![](screenshot.jpg)
 
 **[Click here to see a video of the visualiser in action!](https://www.dropbox.com/scl/fi/smt4flmb2jd6qx4vymkme/2023-08-27-05-26-09.mp4?rlkey=lw0myi72nwesx68pvj072k8gw&dl=0)**
 
